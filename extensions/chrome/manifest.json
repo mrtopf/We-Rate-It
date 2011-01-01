@@ -1,0 +1,25 @@
+{
+  "name": "We rate it",
+  "version": "1.0",
+  "description": "A community rating project",
+  "background_page": "background.html",
+  "icons" : {
+    "0" : "icons/0.png",
+    "6" : "icons/6.png",
+    "12" : "icons/12.png",
+    "16" : "icons/16.png",
+    "18" : "icons/18.png",
+    "no" : "icons/no.png"
+  },
+  "page_action": {
+    "default_icon": "icons/18.png",
+    "popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "history",
+    "http://localhost/",
+    "http://localhost:9991/"
+  ]
+}
+

@@ -1,0 +1,95 @@
+
+<script src="jquery-1.4.2.min.js" type="application/javascript"></script>
+
+<script>
+    var baseurl = "http://localhost:9991/1/";
+    var lastTabId = 0;
+
+    var ratings = {}
+    var domains = {}
+    var user;
+
+    function log(s) {
+        console.log(s);
+    }
+
+    // register a new user and store it's user id here and in localStore
+    function register() {
+        $.post(baseurl+"register", {}, function(data, textResponse) {
+            log("user registered:" + data.userid);
+            if (data) {
+                localStorage["werateit.user"] = JSON.stringify(data);
+                user = data.userid;
+            } else {
+                log("couldn't register user!"); 
+                delete localStorage["werateit.user"];
+                user = null;
+            }
+        });
+    }
+
+    // rate a domain
+    function rate(domain, rating) {
+        var data = {
+            'rating' : rating,
+            'userid' : user
+        }
+        $.post(baseurl+"domains/"+domain, data, function(data, textStatus) {
+                log("rated");
+                log(data);
+                return data;
+        });
+    }
+
+    // store a rating for a tab and update all settings
+    function update_rating(rating, tabId) {
+        if (rating!==null) {
+            var icon = "icons/"+rating+".png";
+        } else {
+            var icon = "icons/no.png";
+        }
+        ratings[tabId] = rating;
+        chrome.pageAction.show(tabId);
+        chrome.pageAction.setIcon({
+            tabId: tabId,
+            path: icon
+        });
+        log("updated rating to "+rating+" for tab "+tabId);
+    }
+
+    //
+    // main script here
+    //
+
+    if (!localStorage["werateit.user"]) {
+        register();
+    } else {
+        var data = JSON.parse(localStorage['werateit.user']);
+        if (data) {
+            user = data.userid;
+            log("user retrieved: "+user);
+        } else {
+            log("could not retrieve user. Trying to register,");
+            register();
+        }
+    }
+
+    chrome.tabs.onSelectionChanged.addListener(function(tabId) {
+        lastTabId = tabId;
+        log("tab changed to : "+tabId);
+    });
+
+    chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+        if (changeInfo.url) {
+            var url_parts=changeInfo.url.split('/');
+            var domain_name_parts = url_parts[2].split(':');
+            var domain_name = domain_name_parts[0];
+            domains[tabId] = domain_name;
+            $.get(baseurl+"domains/"+domain_name, 
+                function (data, textStatus) {
+                    update_rating(data.rating, tabId);
+                });
+        };
+    });
+
+</script>
