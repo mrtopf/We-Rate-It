@@ -4,6 +4,7 @@ from logbook import Logger
 from logbook import FileHandler
 import uuid
 import db
+import datetime
 
 import setup
 
@@ -38,15 +39,20 @@ class Domain(Handler):
         if domains==[]:
             dobj = db.Domain(domain = domain)
             _id = self.settings.domain_db.put(dobj)
-            print _id
             dobj = self.settings.domain_db[_id]
-            print dobj.get_id()
         else:
             dobj = domains[0]
         dobj.set_rating(userid, rating)
-        print dobj._to_dict()
 
         self.settings.domain_db.update(dobj)
+
+        # save in the rating log
+        self.settings.mdb.ratings.insert({
+            'userid' : userid,
+            'rating' : rating,
+            'domain' : domain,
+            'ts' : datetime.datetime.now(),
+        })
 
         # process ratings
         return self.get(domain)
@@ -67,7 +73,7 @@ def main():
     app = App(setup.setup())
     return webserver(app, port)
 
-def app_factory(global_config, **local_conf):
+def backend_factory(global_config, **local_conf):
     settings = setup.setup(**local_conf)
     return App(settings)
 
