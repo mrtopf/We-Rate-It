@@ -27,6 +27,7 @@ setup(name='werateit',
             
       ],
       entry_points="""
-      # -*- Entry points: -*-
+        [paste.app_factory]
+        backend = werateit.http.main:backend_factory
       """,
       )
