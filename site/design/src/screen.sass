@@ -1,0 +1,257 @@
+// This import applies a global reset to any page that imports this stylesheet.
+@import blueprint/reset.sass
+
+// To configure blueprint, edit the partials/base.sass file.
+@import partials/base.sass
+
+// Import all the default blueprint modules so that we can access their mixins.
+@import blueprint
+
+// Import the non-default scaffolding module.
+@import blueprint/scaffolding.sass
+@import compass/utilities.sass
+@import compass/css3.sass
+
+// configuration
+
+$blueprint_font_family: unquote("Lucida Grande"), Helvetica, Arial, sans-serif
+$page_width: 660px
+$main_width: 400px
+$main_container_width: $main_width + 20px
+$bigcolumn_width: 400px
+$gutter_size: 30px
+$sidebar_width: $page_width - $bigcolumn_width - $gutter_size
+$panel_width: $main_width - 20px
+
+$row_gutter: 20px
+$row_width: ($page_width - 20px - 3 * $row_gutter) / 4
+
+$box_color: #333333
+
+//Recommended Blueprint configuration with scoping and semantic layout:
+body
+  +blueprint-reset
+  +blueprint-typography(true)
+  background: #fff
+
+header
+  display: block
+  background: white
+  //+linear-gradient(color_stops(#eee, #ddd))
+  //border-top: 1px solid #aaa
+  //border-bottom: 1px solid #000
+  height: 120px
+  margin: 0
+  h1
+    font-size: 100px
+    font-weight: bold
+    font-style: italic
+
+#headercontent, #footercontent
+  margin: 0 auto
+  width: $page_width
+  padding: 30px
+
+#logo
+  margin-top: 20px
+
+footer
+  display: block
+  //border-top: 5px solid #333333
+  //padding-top: 30px
+  margin-top: 0px
+  #footer
+    color: #000033
+
+#main
+  background: white
+  margin: 0
+  padding-bottom: 150px
+
+#page
+  margin: 0 auto
+  width: $page_width
+  overflow: hidden
+
+#content
+  margin-top: 20px
+  overflow: hidden
+
+nav
+  border-bottom: 1px solid #aaaaaa
+  border-top: 1px solid #eeeeee
+  padding: 5px 0
+  margin: 10px 0 30px 0
+
+#navcontent
+  display: block
+  font-size: 12pt
+  overflow: auto
+  margin: 0
+  padding: 0
+  li
+    float: left
+    list-style: none
+    text-transform: uppercase
+    margin-left: 10px
+    margin-right: 10px
+    ul
+      font-size: 12pt
+      margin: 0
+      padding: 0
+      border: 1px solid #aaaaaa
+      border-top: 0
+      position: absolute
+      z-index: 120
+      background: white
+      clear: both
+      +linear-gradient(color_stops(white, #cccccc))
+      +box-shadow(1px, 3px, 3px, rgba(0, 0, 0, 0.2))
+      margin-left: -2px
+      margin-top: 5px
+      visibility: hidden
+      li
+        margin: 0
+        padding: 7px 15px
+        float: none
+        display: block
+        border-bottom: 1px solid #aaaaaa
+      li:hover
+        background: white
+        color: black
+
+//
+// big column and sidebar
+//
+
+aside
+  float: right
+  margin: 0
+  padding: 10px
+  padding-right: 0
+  padding-top: 0
+  width: $sidebar_width
+
+.bigcolumn
+  width: $bigcolumn_width
+  float: left
+  margin: 0
+  padding: 0
+  border-right: 1px solid #eee
+
+.rows
+  padding: 0px 10px
+  margin-bottom: 30px
+  padding-top: 0
+  overflow: auto
+  h1
+    font-size: 19pt
+  .row
+    margin: 0
+    padding: 0
+    margin-right: $row_gutter
+    float: left
+    width: $row_width
+  .row.last,.bigrow.last
+    margin: 0
+  .bigrow
+    float: left
+    margin: 0
+    padding: 0
+    margin-right: $row_gutter
+    width: $row_width * 2 + $row_gutter
+
+// portlet stuff
+
+.portlet
+  margin: 5px 0 20px 0
+  padding: 0px
+  +border-radius(5px)
+  +linear-gradient(color_stops(white, #eeeeee, #eeeeee))
+  +box-shadow(0px,0px,3px,rgba(0,0,0,0.2))
+  border: 1px solid #cccccc
+  overflow: hidden
+  h2
+    margin: 0
+    padding: 0 8px
+    font-size: 13pt
+  h3
+    margin: 7px 0
+  .content
+    width: $sidebar_width - 12px
+    border-top: 1px solid #cccccc
+    padding: 10px
+    float: left
+    display: block
+
+h1#logofont
+  font-size: 20px
+  font-weight: bold
+  font-style: italic
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif
+  color: #eee
+  
+///
+/// login form 
+///
+
+#loginform
+  margin: 150px auto
+  border: 1px solid #888
+  width: 300px
+  +border-radius(10px)
+  +linear-gradient(color_stops(#fff,#f0f0f0))
+  padding: 20px
+  .field
+    padding-bottom: 10px
+  label
+    display: block
+    font-weight: bold
+    font-size: 16px
+  input
+    font-size: 20px
+  input[type=submit]
+    border: 0
+    +linear-gradient(color_stops(#0af,#0090f0))
+    text-transform: uppercase
+    padding: 4px 20px
+
+///
+/// error box
+///
+
+#error 
+  position: absolute
+  z-index: 99
+  width: 100%
+  height: 40px
+  font-size: 14pt
+  top: -68px
+  background: #fa0
+  +linear-gradient(color_stops(#fa0,#f09000))
+  +box-shadow(#888, 0,2px,3px)
+  border-bottom: 1px solid rgba(255,0,0,0.5)
+  padding: 3px 10px
+  padding-top: 10px
+  left: 0
+  .closebutton
+    display: block
+    float: right
+    margin-right: 10px
+  #error-message
+    float: left
+    font-weight: bold
+
+#page
+  h1
+    font-size: 70px
+    margin: 0
+    padding: 0
+    font-style: italic
+    margin-left: -12px
+
+  #subline
+    font-size: 12px
+    margin-bottom: 10px
+
+
