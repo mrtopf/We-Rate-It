@@ -3,7 +3,6 @@
     var bg;
     function rate() {
         var rating = parseInt($(this).attr("id"));
-        console.log("clicked rating "+rating);
         chrome.tabs.getSelected(null, function(tab) {
             var domain = chrome.extension.getBackgroundPage().domains[tab.id];
             var result = bg.rate(domain, rating);
