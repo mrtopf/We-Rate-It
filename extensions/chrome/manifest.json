@@ -1,8 +1,9 @@
 {
   "name": "We Rate It",
-  "version": "0.1alpha",
+  "version": "0.0.1",
   "description": "We Rate It ist ein Experiment zur Altersbewertung von Websites durch die Community. ",
   "background_page": "background.html",
+  "update_url": "http://werateit.de/extensions/chrome/update.xml",
   "icons" : {
     "0" : "icons/0.png",
     "6" : "icons/6.png",
