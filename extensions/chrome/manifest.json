@@ -1,6 +1,6 @@
 {
   "name": "We Rate It",
-  "version": "0.1alpha",
+  "version": "0.0.1",
   "description": "We Rate It ist ein Experiment zur Altersbewertung von Websites durch die Community. ",
   "background_page": "background.html",
   "icons" : {
