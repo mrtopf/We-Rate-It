@@ -5,12 +5,9 @@
   "background_page": "background.html",
   "update_url": "http://werateit.de/extensions/chrome/update.xml",
   "icons" : {
-    "0" : "icons/0.png",
-    "6" : "icons/6.png",
-    "12" : "icons/12.png",
-    "16" : "icons/16.png",
-    "18" : "icons/18.png",
-    "no" : "icons/no.png"
+    "16" : "icons/icon16.png",
+    "48" : "icons/icon48.png",
+    "128" : "icons/icon128.png"
   },
   "page_action": {
     "default_icon": "icons/no.png",
