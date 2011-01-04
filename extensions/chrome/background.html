@@ -44,9 +44,9 @@
     // store a rating for a tab and update all settings
     function update_rating(rating, tabId) {
         if (rating!==null) {
-            var icon = "icons/"+rating+".png";
+            var icon = "icons/19/"+rating+".png";
         } else {
-            var icon = "icons/no.png";
+            var icon = "icons/19/no.png";
         }
         ratings[tabId] = rating;
         chrome.pageAction.show(tabId);
